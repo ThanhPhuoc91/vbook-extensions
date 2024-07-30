@@ -1,7 +1,7 @@
 {
   "metadata": {
     "name": "Truyện Full",
-    "author": "vBook",
+    "author": "Phuoc",
     "version": 6,
     "source": "https://truyenfull.io",
     "regexp": "(www.)?(truyenfull.io|truyenfull.net)/[^/]+/?$",
