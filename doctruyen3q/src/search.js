@@ -1,0 +1,27 @@
+load('config.js');
+
+function execute(key, page) {
+    if (!page) page = '1';
+    let response = fetch('https://doctruyen3qvn.com/tim-truyen',{
+        method : "GET",
+        queries : {
+            keyword : key
+        }
+    });
+    if(response.ok){
+        let doc = response.html();
+        let el = doc.select(".item-manga")
+        let data = [];
+        el.forEach(e =>{
+            data.push({
+                name: e.select("h3 a").first().text(),
+                link: e.select("h3 a").first().attr("href"),
+                cover: e.select(".image-item img").attr("data-original") || e.select(".image-item img").attr("src"),
+                description: e.select(".chapter-detail a").first().text(),
+                host: BASE_URL 
+            })
+        })
+        return Response.success(data)
+    }
+    return null
+}
