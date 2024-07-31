@@ -5,6 +5,17 @@
   },
   "data": [
     {
+      "name": "Đọc Truyện 3Q",
+      "author": "Phuoc",
+      "path": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/doctruyen3q/plugin.zip",
+      "version": 1,
+      "source": "https://doctruyen3qvn.com/",
+      "icon": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/doctruyen3q/icon.png",
+      "description": "Đọc truyện trên trang doctruyen3qvn.com/",
+      "type": "comic",
+      "locale": "vi_VN"
+    },
+    {
       "name": "Bạch Ngọc Sách",
       "author": "Phuoc",
       "path": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/bachngocsach/plugin.zip",
