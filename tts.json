@@ -13,6 +13,16 @@
       "icon": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/gemini-tts/icon.png",
       "description": "Nghe truyện bằng Gemini TTS",
       "type": "tts"
+    },
+    {
+      "name": "Dichtienghoa Translate",
+      "author": "phuoc",
+      "version": 1,
+      "source": "https://dichtienghoa.com",
+      "path": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/dichtienghoa/plugin.zip",
+      "icon": "https://raw.githubusercontent.com/ThanhPhuoc91/vbook-extensions/master/dichtienghoa/icon.png",
+      "description": "Dịch truyện bằng DTH Translate",
+      "type": "translate"
     }
   ]
 }
