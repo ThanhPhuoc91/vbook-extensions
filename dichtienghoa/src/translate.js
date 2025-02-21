@@ -1,54 +1,44 @@
-load("language_list.js");
+function execute(text, from, to, apiKey) {
+    const sourceLang = "zh"; // Chinese
+    const targetLang = "vi"; // Vietnamese
+    return translateContent(text, sourceLang, targetLang, 0);
+}
 
-async function dichTiengVietWebsite(textGoc, fromLang = null, toLang = "vi") {
-    /**
-     * Dịch văn bản bằng website dichtienghoa.com (phiên bản Javascript tương tự Baidu Translate).
-     * Mặc định dịch từ tiếng Hoa sang tiếng Việt.
-     *
-     * Args:
-     *     textGoc (string): Văn bản gốc cần dịch.
-     *     fromLang (string, optional): Mã ngôn ngữ nguồn (ví dụ: 'zh' cho tiếng Hoa). Nếu null, để tự độngDetect. (Hiện tại không dùng detect language cho dichtienghoa.com)
-     *     toLang (string): Mã ngôn ngữ đích, mặc định là 'vi' (tiếng Việt).
-     *
-     * Returns:
-     *     string: Văn bản đã dịch sang tiếng Việt, hoặc null nếu có lỗi.
-     */
-    const url = "https://dichtienghoa.com/translate/ajax";
-    const params = new URLSearchParams({
-        "text": textGoc,
-        "type": toLang // Loại dịch, mặc định là "vi" (tiếng Việt)
+function translateContent(text, from, to, retryCount) {
+    if (retryCount > 2) return null; 
+
+    const apiUrl = '/translatePost.do'; 
+    const formData = new FormData();
+    formData.append('text', text);
+    formData.append('type', to); 
+
+    let response = fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
     });
 
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: params.toString(),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const dataJson = await response.json();
-        if (dataJson && dataJson.translation) {
-            return dataJson.translation;
+    if (response.ok) {
+        let result = response.json();
+        let trans = "";
+        if (result && result.translation) {
+            trans = result.translation;
+            return Response.success(trans.trim()); 
         } else {
-            return null;
+            return translateContent(text, from, to, retryCount + 1);
         }
-
-    } catch (error) {
-        console.error("Lỗi dịch thuật:", error);
-        return null;
+    } else {
+        return translateContent(text, from, to, retryCount + 1); 
     }
 }
 
-async function execute(text, from, to, apiKey) {
-    /**
-     * Hàm thực thi dịch thuật, tương tự cấu trúc 'execute' của Baidu code.
-     * apiKey không cần thiết cho dichtienghoa.com (để tương thích với params Baidu)
-     */
-    return await dichTiengVietWebsite(text, from, to);
+function detectLanguage(text) {
+    // Hàm này không thực sự cần thiết cho dichtienghoa.com trong trường hợp này,
+    // nhưng để giữ cấu trúc tương tự code mẫu, chúng ta tạo một hàm dummy
+    // Vì chúng ta đang dịch từ tiếng Trung, nên có thể giả định ngôn ngữ là 'zh'
+    return "zh"; // Chinese
 }
+const Response = {
+    success: function(result) {
+        return result;
+    }
+};

@@ -4,15 +4,14 @@
     "author": "phuoc",
     "version": 1,
     "source": "https://dichtienghoa.com",
-    "description": "Dịch truyện bằng Baidu Translate",
+    "description": "Dịch truyện bằng dichtienghoa Translate",
     "type": "translate"
   },
   "script": {
-    "language": "language.js",
     "translate": "translate.js"
   },
   "config": {
-    "support_auto_detect": true,
+    "support_auto_detect": false,
     "max_length": 9500,
     "required_api_key": false,
     "support_url": "https://dichtienghoa.com"
